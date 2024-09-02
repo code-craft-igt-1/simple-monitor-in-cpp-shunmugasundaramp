@@ -59,5 +59,5 @@ int vitalsOk(float temperature, float pulseRate, float spo2) {
   isVitalsOk += isPulseRateOutOfRange(pulseRate, pulseRateMessage);
   string spo2Message = "Oxygen Saturation out of range!";
   isVitalsOk += isSpo2OutOfRange(spo2, spo2Message);
-  return !!isVitalsOk;
+  return !isVitalsOk;
 }
