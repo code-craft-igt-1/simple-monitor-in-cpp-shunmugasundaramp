@@ -14,7 +14,7 @@ bool CheckMargins(float minRange, float maxRange, float value) {
   return isValueInRange;
 }
 
-void ShowWarning(string& message) {
+void ShowWarning(const string& message) {
   cout << message << "\n";
   for (int i = 0; i < 6; i++) {
     cout << "\r* " << flush;
@@ -24,7 +24,7 @@ void ShowWarning(string& message) {
   }
 }
 
-bool isTemperatureCritical(float temperature, string& message) {
+bool isTemperatureCritical(float temperature, const string& message) {
   bool isTemperatureCritical = false;
   if (!CheckMargins(TEMPERATURE_LOWER_LIMIT, TEMPERATURE_UPPER_LIMIT, temperature)) {
     ShowWarning(message);
@@ -33,7 +33,7 @@ bool isTemperatureCritical(float temperature, string& message) {
   return isTemperatureCritical;
 }
 
-bool isPulseRateOutOfRange(float pulseRate, string& message) {
+bool isPulseRateOutOfRange(float pulseRate, const string& message) {
   bool isPulseRateOutOfRange = false;
   if (!CheckMargins(PULSE_RATE_LOWER_LIMIT, PULSE_RATE_UPPER_LIMIT, pulseRate)) {
     ShowWarning(message);
@@ -42,7 +42,7 @@ bool isPulseRateOutOfRange(float pulseRate, string& message) {
   return isPulseRateOutOfRange;
 }
 
-bool isSpo2OutOfRange(float spo2, string& message) {
+bool isSpo2OutOfRange(float spo2, const string& message) {
   bool isSpo2OutOfRange = false;
   if (!CheckMargins(SPO2_LOWER_LIMIT, SPO2_UPPER_LIMIT, spo2)) {
     ShowWarning(message);
