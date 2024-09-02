@@ -49,8 +49,8 @@ bool isSpo2OutOfRange(float spo2) {
 }
 
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-  if (isTemperatureCritical(temperature) || 
-      isPulseRateOutOfRange(pulseRate) || 
+  if (isTemperatureCritical(temperature) ||
+      isPulseRateOutOfRange(pulseRate) ||
       isSpo2OutOfRange(spo2)) {
     return 0;
   }
