@@ -24,27 +24,30 @@ void ShowWarning(const string& message) {
   }
 }
 
-bool isTemperatureCritical(float temperature, const string& message) {
+bool isTemperatureCritical(float temperature) {
   bool isTemperatureCritical = false;
   if (!CheckMargins(TEMPERATURE_LOWER_LIMIT, TEMPERATURE_UPPER_LIMIT, temperature)) {
+    string message = "Temperature is critical!";
     ShowWarning(message);
     isTemperatureCritical = true;
   }
   return isTemperatureCritical;
 }
 
-bool isPulseRateOutOfRange(float pulseRate, const string& message) {
+bool isPulseRateOutOfRange(float pulseRate) {
   bool isPulseRateOutOfRange = false;
   if (!CheckMargins(PULSE_RATE_LOWER_LIMIT, PULSE_RATE_UPPER_LIMIT, pulseRate)) {
+    string message = "Pulse Rate is out of range!";
     ShowWarning(message);
     isPulseRateOutOfRange = true;
   }
   return isPulseRateOutOfRange;
 }
 
-bool isSpo2OutOfRange(float spo2, const string& message) {
+bool isSpo2OutOfRange(float spo2) {
   bool isSpo2OutOfRange = false;
   if (!CheckMargins(SPO2_LOWER_LIMIT, SPO2_UPPER_LIMIT, spo2)) {
+    string message = "Oxygen Saturation out of range!";
     ShowWarning(message);
     isSpo2OutOfRange = true;
   }
@@ -52,12 +55,7 @@ bool isSpo2OutOfRange(float spo2, const string& message) {
 }
 
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-  int isVitalsOk = 0;
-  string temperatureMessage = "Temperature is critical!";
-  isVitalsOk += isTemperatureCritical(temperature, temperatureMessage);
-  string pulseRateMessage = "Pulse Rate is out of range!";
-  isVitalsOk += isPulseRateOutOfRange(pulseRate, pulseRateMessage);
-  string spo2Message = "Oxygen Saturation out of range!";
-  isVitalsOk += isSpo2OutOfRange(spo2, spo2Message);
-  return !isVitalsOk;
+  return !(isTemperatureCritical(temperature) ||
+           isPulseRateOutOfRange(pulseRate) ||
+           isSpo2OutOfRange(spo2));
 }
