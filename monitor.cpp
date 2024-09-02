@@ -5,11 +5,12 @@
 #include <iostream>
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
 
-int CheckMargins(float minRange, float maxRange, float value) {
+bool CheckMargins(float minRange, float maxRange, float value) {
+  bool isValueInRange = true;
   if (value < minRange || value > maxRange) {
-    return 0;
+    isValueInRange = false;
   }
-  return 1;
+  return isValueInRange;
 }
 
 void ShowWarning() {
@@ -22,38 +23,37 @@ void ShowWarning() {
 }
 
 bool isTemperatureCritical(float temperature) {
+  bool isTemperatureCritical = false;
   if (!CheckMargins(95, 102, temperature)) {
     cout << "Temperature is critical!\n";
     ShowWarning();
-    return true;
+    isTemperatureCritical = true;
   }
-  return false;
+  return isTemperatureCritical;
 }
 
 bool isPulseRateOutOfRange(float pulseRate) {
+  bool isPulseRateOutOfRange = false;
   if (!CheckMargins(60, 100, pulseRate)) {
     cout << "Pulse Rate is out of range!\n";
     ShowWarning();
-    return true;
+    isPulseRateOutOfRange = true;
   }
-  return false;
+  return isPulseRateOutOfRange;
 }
 
 bool isSpo2OutOfRange(float spo2) {
+  bool isSpo2OutOfRange = false;
   if (!CheckMargins(90, 100, spo2)) {
     cout << "Oxygen Saturation out of range!\n";
     ShowWarning();
-    return true;
+    isSpo2OutOfRange = true;
   }
-  return false;
+  return isSpo2OutOfRange;
 }
 
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-  int isvitalsOk = 1;
-  if (isTemperatureCritical(temperature) ||
-      isPulseRateOutOfRange(pulseRate) ||
-      isSpo2OutOfRange(spo2)) {
-    isvitalsOk = 0;
-  }
-  return isvitalsOk;
+  return !(isTemperatureCritical(temperature) ||
+           isPulseRateOutOfRange(pulseRate) ||
+           isSpo2OutOfRange(spo2));
 }
