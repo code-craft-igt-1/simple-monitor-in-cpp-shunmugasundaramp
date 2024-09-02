@@ -6,9 +6,9 @@
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
 
 bool CheckMargins(float minRange, float maxRange, float value) {
-  bool isValueInRange = true;
-  if (value < minRange || value > maxRange) {
-    isValueInRange = false;
+  bool isValueInRange = false;
+  if (minRange <= value && value <= maxRange) {
+    isValueInRange = true;
   }
   return isValueInRange;
 }
