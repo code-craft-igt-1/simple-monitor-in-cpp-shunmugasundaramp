@@ -5,33 +5,34 @@
 #include <iostream>
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
 
+int CheckMargins(float minRange, float maxRange, float value) {
+  if (value < minRange || value > maxRange) {
+    return 0;
+  }
+  return 1;
+}
+
+void ShowWarning() {
+  for (int i = 0; i < 6; i++) {
+    cout << "\r* " << flush;
+    sleep_for(seconds(1));
+    cout << "\r *" << flush;
+    sleep_for(seconds(1));
+  }
+}
+
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-  if (temperature > 102 || temperature < 95) {
+  if (CheckMargins(95, 102, temperature)) {
     cout << "Temperature is critical!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
-    }
+    ShowWarning();
     return 0;
-  } else if (pulseRate < 60 || pulseRate > 100) {
+  } else if (CheckMargins(60, 100, pulseRate)) {
     cout << "Pulse Rate is out of range!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
-    }
+    ShowWarning();
     return 0;
-  } else if (spo2 < 90) {
+  } else if (CheckMargins(0, 90, spo2)) {
     cout << "Oxygen Saturation out of range!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
-    }
+    ShowWarning();
     return 0;
   }
   return 1;
