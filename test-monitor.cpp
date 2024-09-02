@@ -5,10 +5,16 @@
 TEST(Monitor, EverythingIsOk) {
   ASSERT_TRUE(vitalsOk(98.1, 70, 98));
 }
-TEST(Monitor, OnlyTemperatureIsOffRange) {
-  ASSERT_FALSE(vitalsOk(105, 75, 100)); 
+TEST(Monitor, OnlyLowTemperature) {
+  ASSERT_FALSE(vitalsOk(90, 75, 100));
 }
-TEST(Monitor, OnlyPulseRateIsOffRange) {
+TEST(Monitor, OnlyHighTemperature) {
+  ASSERT_FALSE(vitalsOk(105, 75, 100));
+}
+TEST(Monitor, OnlyLowPulseRate) {
+  ASSERT_FALSE(vitalsOk(99, 50, 100));
+}
+TEST(Monitor, OnlyHighPulseRate) {
   ASSERT_FALSE(vitalsOk(99, 102, 100));
 }
 TEST(Monitor, OnlySpo2IsOffRange) {
