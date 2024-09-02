@@ -52,10 +52,12 @@ bool isSpo2OutOfRange(float spo2, const string& message) {
 }
 
 int vitalsOk(float temperature, float pulseRate, float spo2) {
+  int isVitalsOk = 0;
   string temperatureMessage = "Temperature is critical!";
+  isVitalsOk += isTemperatureCritical(temperature, temperatureMessage);
   string pulseRateMessage = "Pulse Rate is out of range!";
+  isVitalsOk += isPulseRateOutOfRange(pulseRate, pulseRateMessage);
   string spo2Message = "Oxygen Saturation out of range!";
-  return !(isTemperatureCritical(temperature, temperatureMessage) ||
-           isPulseRateOutOfRange(pulseRate, pulseRateMessage) ||
-           isSpo2OutOfRange(spo2, spo2Message));
+  isVitalsOk += isSpo2OutOfRange(spo2, spo2Message);
+  return !!isVitalsOk;
 }
