@@ -22,15 +22,15 @@ void ShowWarning() {
 }
 
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-  if (CheckMargins(95, 102, temperature)) {
+  if (!CheckMargins(95, 102, temperature)) {
     cout << "Temperature is critical!\n";
     ShowWarning();
     return 0;
-  } else if (CheckMargins(60, 100, pulseRate)) {
+  } else if (!CheckMargins(60, 100, pulseRate)) {
     cout << "Pulse Rate is out of range!\n";
     ShowWarning();
     return 0;
-  } else if (CheckMargins(90, ~0, spo2)) {
+  } else if (!CheckMargins(90, ~0, spo2)) {
     cout << "Oxygen Saturation out of range!\n";
     ShowWarning();
     return 0;
