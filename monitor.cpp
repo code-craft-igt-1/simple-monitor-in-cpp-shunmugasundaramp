@@ -30,7 +30,7 @@ int vitalsOk(float temperature, float pulseRate, float spo2) {
     cout << "Pulse Rate is out of range!\n";
     ShowWarning();
     return 0;
-  } else if (CheckMargins(0, 90, spo2)) {
+  } else if (CheckMargins(90, ~0, spo2)) {
     cout << "Oxygen Saturation out of range!\n";
     ShowWarning();
     return 0;
